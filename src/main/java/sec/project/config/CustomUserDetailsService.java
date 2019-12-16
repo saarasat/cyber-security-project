@@ -28,6 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("No such user: " + username);
         }
 
+        // FLAW 3: new user is created without any password-requirements
         return new org.springframework.security.core.userdetails.User(
                 username,
                 this.accountDetails.get(username),

@@ -24,6 +24,7 @@ public class SignupController {
         return "form";
     }
 
+    // FLAW 3: Broken Access Control: No user authentication done when submitting the form
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String submitForm(@RequestParam String name, @RequestParam String address) {
         signupRepository.save(new Signup(name, address));

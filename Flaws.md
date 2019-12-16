@@ -30,6 +30,18 @@ Whenever a database is used, it is essential to sanitize and validate the data t
 
 #### Fix: Validation and sanitazion of the user inputs. 
 
-For instance the data should be checked and only letters a-z, or A-Z and numbers should be allowed. Now also special characters like ";" are allowed, which enables malicious SQL-queries enter the system. Also the inputs should be validated considering length, that they are not too short or too long and the person has not already signed up. These checks should be done, before the query-statement is done
+The data should be checked and for example only letters a-z, or A-Z and numbers should be allowed. Now also special characters like ";" are allowed, which enables malicious SQL-queries enter the system. Also the inputs should be validated considering length, that they are not too short or too long and the person has not already signed up. These checks should be done, before the query-statement is done. Additional ORM-tool methods should be used, these provide checks for such malicious statements. 
 
+### Flaw 3: Broken Access Control 
+#### Description: The application has no sort of password-requirements or login properties
+
+An application without any kind of login is vulnerable to unauthorized information disclosure, modification or destruction of all data and/or performing a business function outside of the limits of the user. Attackers could for instance gain easier access to other people's signup data, when their own access to the application and its form is never properly authenticated.
+
+#### Fix: Use of passwords when creating new user accounts, using a login page and denying access by default
+
+At the moment a new user is created without any password-requirements. This also means that other peoples accounts and pages specific to other accounts are too easily accessed. Therefore, when creating a new user-account in the CustomUserDetailsService.java -class, a password should be added.
+
+A login-template should also be used, so that each user of the application is authenticated properly before accessing any additional pages. For instance the template done.html can be accessed without any authentication. The necessary checks on the validity of the data of the login-form should naturally also be carried out. 
+
+When submitting any additional forms, the user's authentication should always be checked. No access to any request method that posts data, should be granted without proper credentials and user-roles. 
 
