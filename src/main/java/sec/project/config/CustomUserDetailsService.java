@@ -18,6 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @PostConstruct
     public void init() {
         this.accountDetails = new TreeMap<>();
+        // FLAW 5: No log-in required with the user account, before submitting the sign-up form.
         this.accountDetails.put("ted", "$2a$06$rtacOjuBuSlhnqMO2GKxW.Bs8J6KI0kYjw/gtF0bfErYgFyNTZRDm");
     }
 

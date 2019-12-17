@@ -35,7 +35,7 @@ The data should be checked and for example only letters a-z, or A-Z and numbers 
 ### Flaw 3: Broken Access Control 
 #### Description: The application has no sort of password-requirements or login properties
 
-An application without any kind of login is vulnerable to unauthorized information disclosure, modification or destruction of all data and/or performing a business function outside of the limits of the user. Attackers could for instance gain easier access to other people's signup data, when their own access to the application and its form is never properly authenticated.
+An application without any kind of login is vulnerable to unauthorized information disclosure, modification or destruction of all data and/or performing a business function outside of the limits of the user. Attackers could for instance gain easier access to other people's signup data, when their own access to the signup and its submit-form is never properly authenticated.
 
 #### Fix: Use of passwords when creating new user accounts, using a login page and denying access by default
 
@@ -48,9 +48,16 @@ When submitting any additional forms, the user's authentication should always be
 ### Flaw 4: Sensitive Data Exposure
 #### Description: The application asks for social security number and transmits it in clear text
 
-In the application there is now a question for the social security number of the person who signs up. The data is only transmitted in clear text from the signup-form in the client's browser all the way through to the database. There is no encryption or additional protection for such sensitive data, and the application uses HTTP. This combination makes it very vulnerable for attacks. 
-
 #### Fix: Use of encryption and no unnecessary storing of sensitive data
 
 Such data as social security number is really unnecessary for the application. All sensitive data should have a clear business purpose and gathering it should comply with all the laws and regulatory requirements. Sensitive data should only be stored as short period of time as possible. HTTP is an insecure way of transmitting such data, TLS should be use. Encryption of the social security number should be done as well.  
+
+### Flaw 5: Insufficient Logging and Monitoring
+#### Description: No logging 
+
+There is no login-template in the application at the moment even though user accounts are created by names. As stated before, this is a serious flaw already by itself. The auditable events, such as logins, failed logins and submission of data through the form is not logged and linked to any individual account, fake or otherwise.
+
+#### Fix: Inserting a login-page and starting to log the times the application is accessed
+
+Firstly the application should have some kind of a login-page, before the signup-form can be accessed. All login, access control failures and server-side input validation failures should be logged. This should be done with sufficient user context, so that suspicious or malicious accounts can be spotted. 
 
