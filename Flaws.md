@@ -45,3 +45,12 @@ A login-template should also be used, so that each user of the application is au
 
 When submitting any additional forms, the user's authentication should always be checked. No access to any request method that posts data, should be granted without proper credentials and user-roles. 
 
+### Flaw 4: Sensitive Data Exposure
+#### Description: The application asks for social security number and transmits it in clear text
+
+In the application there is now a question for the social security number of the person who signs up. The data is only transmitted in clear text from the signup-form in the client's browser all the way through to the database. There is no encryption or additional protection for such sensitive data, and the application uses HTTP. This combination makes it very vulnerable for attacks. 
+
+#### Fix: Use of encryption and no unnecessary storing of sensitive data
+
+Such data as social security number is really unnecessary for the application. All sensitive data should have a clear business purpose and gathering it should comply with all the laws and regulatory requirements. Sensitive data should only be stored as short period of time as possible. HTTP is an insecure way of transmitting such data, TLS should be use. Encryption of the social security number should be done as well.  
+
